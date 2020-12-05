@@ -28,4 +28,21 @@ public class Client {
 
     @Column(name = "data_register", nullable = false)
     private LocalDate dateRegister;
+
+    @Column(name = "data_updated")
+    private LocalDate dateUpdated;
+
+    @Column(nullable = false)
+    private boolean active;
+
+    @PrePersist
+    public void prePersist(){
+        setActive(true);
+        setDateRegister(LocalDate.now());
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        setDateUpdated(LocalDate.now());
+    }
 }
